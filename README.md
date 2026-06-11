@@ -44,7 +44,7 @@ Crie o arquivo de ambiente a partir do exemplo fornecido:
 cp env .env
 ```
 
-Abra o arquivo `.env` e ajuste as credenciais do seu banco de dados MySQL para refletir o seu ambiente (Laragon):
+Abra o arquivo `.env` e ajuste as credenciais do seu banco de dados MySQL para refletir o seu ambiente local:
 
 ```env
 CI_ENVIRONMENT = development
@@ -56,12 +56,18 @@ database.default.password = sua_senha
 database.default.DBDriver = MySQLi
 ```
 
-### 2. Migrations e Autenticação
+### 2. Migrations e Seeder
 
 Para gerar as tabelas de domínio do sistema (`tab_categoria`, `tab_produto`) e construir a estrutura de segurança do CodeIgniter Shield, execute no terminal:
 
 ```bash
 php spark migrate --all
+```
+
+Em seguida, popule o banco de dados com as categorias, produtos e o usuário de teste executando o seeder:
+
+```bash
+php spark db:seed TesteSeeder
 ```
 
 ### 3. Iniciar o Servidor
@@ -81,7 +87,9 @@ php spark serve
 
 1. Acesse `http://localhost:8080` no seu navegador.
 2. O filtro de sessão irá redirecioná-lo automaticamente para a tela de login. 
-3. Clique em **Register** e crie um usuário de teste (ex: `Usuário: Avaliador` | `Senha: 12345678`).
+3. Utilize as seguintes credenciais (geradas automaticamente pelo seeder) para acessar o sistema:
+   - **E-mail:** `avaliador@teste.com`
+   - **Senha:** `12345678`
 4. Navegue entre os módulos de **Categorias** e **Produtos** para testar as operações de CRUD e o comportamento do filtro *Select2* via AJAX.
 
 ### 🛡️ Regra de Negócio (Integridade Relacional)
